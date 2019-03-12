@@ -15,13 +15,25 @@ public class MyList<E> {
     }
 
     public void ensureCapa(int index){
-        int newSize = DEFAULT_CAPACITY * (index % DEFAULT_CAPACITY + 1);
+        int newSize = 1;
+        if (index < elements.length)
+        {
+            newSize = DEFAULT_CAPACITY * 2;
+        } else {
+            newSize = DEFAULT_CAPACITY * (index/DEFAULT_CAPACITY + 1);
+        }
+
+        System.out.println(newSize);
         elements = Arrays.copyOf(elements, newSize);
     }
 
     public void add (int index, E element) {
         if (index >= elements.length) {
             ensureCapa(index);
+        }
+
+        if (elements[elements.length-1] != null) {
+            ensureCapa(2);
         }
 
 //        if (elements[DEFAULT_CAPACITY-1].equals(null)) {
